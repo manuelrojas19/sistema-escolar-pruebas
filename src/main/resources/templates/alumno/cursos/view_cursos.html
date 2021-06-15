@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cursos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            crossorigin="anonymous"></script>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/assets/scrollbar/jquery.mCustomScrollbar.min.css}">
+</head>
+<body>
+<div th:insert="fragments/sidebar :: sidebar"></div>
+<div id="content">
+    <header>
+        <div th:insert="fragments/navbar :: navbar" class="fixed-top"></div>
+    </header>
+    <main role="main">
+        <div class="container">
+            <div class="row">
+                <div th:each="curso : ${cursos}" class="col-sm-6 mt-4">
+                    <div class="card">
+                        <h5 th:text="${curso.getAsignatura().getIdAsignatura()} + ': ' + ${curso.getAsignatura().getNombre()}"
+                            class="card-header">Nombre de la asignatura </h5>
+                        <div class="card-body">
+                            <h5 th:text="'ID del curso: ' + ${curso.getId()}" class="card-title">
+                                ID:</h5>
+                            <p th:text="'Academia: ' + ${curso.getAsignatura().academia.nombre}" class="card-text">
+                                Académia</p>
+                            <p th:text="'Profesor: ' +
+                            ${curso.getProfesor().getPrimerApellido()} + ' ' +
+                            ${curso.getProfesor().getSegundoApellido()} + ' ' +
+                            ${curso.getProfesor().getPrimerNombre()} + ' ' +
+                            ${curso.getProfesor().getSegundoNombre()}" class="card-title">
+                                ID:</p>
+                            <a th:href="@{/estudiante/cursos/{id_curso}/tareas (id_curso = ${curso.getId()})}"
+                               class="btn btn-red">Ver tareas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div class="overlay"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+<!-- Custom Scrollbar -->
+<script th:src="@{/assets/scrollbar/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script th:src="@{/scripts/sidebar.js}"></script>
+</body>
+</html>

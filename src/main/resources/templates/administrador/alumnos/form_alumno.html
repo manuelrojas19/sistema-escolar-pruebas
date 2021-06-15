@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Alumnos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+<header th:insert="fragments/navbar :: navbar" class="sticky-top"></header>
+<main role="main" class="mt-5">
+    <div class="container">
+        <div class="card">
+            <h4 class="card-header"><strong>Datos del alumno</strong></h4>
+            <div class="card-body">
+                <div class="alert alert-dark" role="alert">
+                    <p>El usuario y la contraseña del alumno para acceder al sistema son generados en base a las dos
+                        primeras letras de su primer apellido y primer nombre y los primeros cuatro dígitos de su ID.
+                        Por ejemplo para el alumno <a
+                                class="alert-link">Rojas Ramos
+                            Manuel </a>con numero de boleta <a class="alert-link">2019600987</a> el número de boleta es
+                        su usuario y la contraseña
+                        es
+                        <a class="alert-link">RoMa2019</a>.</p>
+                </div>
+                <form th:action="@{/administrador/alumnos/save}" method="post" th:object="${alumno}" class="row g-3">
+                    <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+                        Por favor corriga los siguientes errores:
+                        <ul>
+                            <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                    <input type="hidden" id="id" name="id" th:value="${isEdit}?${alumno.getBoleta()}:-1"
+                           required="required">
+                    <div class="col-md-6">
+                        <label for="boleta" class="form-label">Boleta</label>
+                        <input type="text" th:field="*{boleta}" class="form-control" id="boleta" name="boleta"
+                               required="required">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="programa" class="form-label">Programa académico</label>
+                        <select id="programa" th:field="*{programa.id}" name="programa" class="form-select">
+                            <option th:each="programaTemp : ${programas}" th:value="${programaTemp.id}"
+                                    th:text="${programaTemp.nombre}">Ciencias de la informática
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="primerApellido" class="form-label">Primer Apellido</label>
+                        <input type="text" th:field="*{primerApellido}" class="form-control" id="primerApellido"
+                               name="primerApellido" required="required">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="segundoApellido" class="form-label">Segundo Apellido</label>
+                        <input type="text" th:field="*{segundoApellido}" class="form-control" id="segundoApellido"
+                               name="segundoApellido">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="primerNombre" class="form-label">Primer Nombre</label>
+                        <input type="text" th:field="*{primerNombre}" class="form-control" id="primerNombre"
+                               name="primerNombre" required="required">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="segundoNombre" class="form-label">Segundo Nombre</label>
+                        <input type="text" th:field="*{segundoNombre}" class="form-control" id="segundoNombre"
+                               name="segundoNombre">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="creditos" class="form-label">Créditos</label>
+                        <input type="text" th:field="*{creditos}" class="form-control" id="creditos"
+                               name="creditos">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+</body>
+</html>

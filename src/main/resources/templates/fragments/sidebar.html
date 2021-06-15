@@ -1,0 +1,23 @@
+<nav th:fragment="sidebar" id="sidebar">
+    <ul class="list-unstyled components ">
+        <li>
+            <a aria-current="page"
+               th:href="@{/}">Inicio</a>
+        </li>
+        <li>
+            <a sec:authorize="hasAnyAuthority('Alumno')" aria-current="page"
+               th:href="@{/estudiante/cursos/index}">Mis cursos</a>
+        </li>
+        <li>
+            <a sec:authorize="hasAnyAuthority('Alumno')" aria-current="page"
+               th:href="@{/estudiante/inscripciones/index}">Inscribirse a cursos</a>
+        </li>
+        <li>
+            <a sec:authorize="hasAnyAuthority('Profesor')" aria-current="page"
+               th:href="@{/profesor/cursos/index}">Cursos</a>
+        </li>
+        <li sec:authorize="hasAnyAuthority('Administrador')">
+            <a aria-current="page" th:href="@{/administrador/alumnos/index}">Administración</a>
+        </li>
+    </ul>
+</nav>

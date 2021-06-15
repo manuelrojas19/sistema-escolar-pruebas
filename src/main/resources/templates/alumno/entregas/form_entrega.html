@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Entrega</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+<header th:insert="fragments/navbar :: navbar" class="sticky-top"></header>
+<main role="main" class="mt-5">
+    <div class="container">
+        <div class="card">
+            <h4 class="card-header"><strong>Entrega</strong></h4>
+            <div class="card-body">
+                <form th:action="@{/estudiante/cursos/{id_curso}/tareas/{id_tarea}/entregar (id_curso = ${idCurso}, id_tarea = ${idTarea})}"
+                      th:object="${entrega}" enctype="multipart/form-data" class="row g-3" method="post">
+                    <div class="col-md-12">
+                        <label for="formFile" class="form-label">Tu trabajo</label>
+                        <input class="form-control" type="file" id="formFile" name="tareaFile">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="exampleFormControlTextarea1" class="form-label">Comentarios de la entrega</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Entregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+</body>
+</html>

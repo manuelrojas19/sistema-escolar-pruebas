@@ -1,0 +1,53 @@
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button type="button" id="sidebarCollapse" class="btn navbar-toggler-icon mr-auto"></button>
+
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/images/2.png}" alt="" width="60" height="60">
+        </a>
+        <a class="btn btn-primary ml-auto" th:href="@{/logout}">Salir</a>
+    </div>
+</nav>
+<nav th:fragment="menu-navbar" class="navbar navbar-expand-lg navbar-dark mt-sm-0 mt-md-0">
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mx-auto">
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="hasAnyAuthority('Alumno')" aria-current="page"
+                   th:href="@{/}">Cursos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="hasAnyAuthority('Alumno')" aria-current="page"
+                   th:href="@{/}">Tareas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="hasAnyAuthority('Alumno')" aria-current="page"
+                   th:href="@{/}">Calificaciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="hasAnyAuthority('Profesor')" aria-current="page"
+                   th:href="@{/profesor/cursos/{id_curso}/alumnos (id_curso = ${idCurso})}">Alumnos inscritos en el curso</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" sec:authorize="hasAnyAuthority('Profesor')" aria-current="page"
+                   th:href="@{/profesor/cursos/{id_curso}/tareas (id_curso = ${idCurso})}">Tareas asignadas al curso</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('Administrador')">
+                <a class="nav-link" aria-current="page"
+                   th:href="@{/administrador/alumnos/index}">Administrar Alumnos</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('Administrador')">
+                <a class="nav-link" aria-current="page"
+                   th:href="@{/administrador/profesores/index}">Administrar Profesores</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('Administrador')">
+                <a class="nav-link" aria-current="page"
+                   th:href="@{/administrador/asignaturas/index}">Administrar Asignaturas</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAnyAuthority('Administrador')">
+                <a class="nav-link" aria-current="page" th:href="@{/administrador/cursos/index}">Administrar Cursos</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
